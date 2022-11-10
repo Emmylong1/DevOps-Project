@@ -1,25 +1,15 @@
 pipeline {
-     agent any
+  agent {label 'linux'}
+  
      stages {
-         /* "Build" and "Test" stages omited /*
-         
-         stage ('Deploy - Staging')
-             steps {
-                 sh './deploy staging'
-                 sh './run-smoke-tests'
-            }
-        }
-
-        stage('Sanity check') {
-            steps {
-                input "Does the staging environment look ok?"
-            }
-        }
-
-        stage('Deploy - Production') {
-            steps {
-                sh './deploy production'
-            }
-        }
+       stage ('hello')
+         steps {
+           sh '''
+            ansible --version
+            ansible-playbook --version
+            ansible-galaxy --version
+          '''
+          }
+       }
     }
-}
+  }
